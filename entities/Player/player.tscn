@@ -1,41 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8sovydtqyadr"]
+[gd_scene load_steps=10 format=3 uid="uid://b8sovydtqyadr"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_bghuu"]
-[ext_resource type="Texture2D" uid="uid://3txu5rtqnumc" path="res://entities/Player/assets/plane1.png" id="2_1rlcc"]
-[ext_resource type="Script" path="res://entities/Player/cannon.gd" id="3_yd084"]
-[ext_resource type="PackedScene" uid="uid://c3bcptdah4iur" path="res://entities/bullet/bullet.tscn" id="4_mppoi"]
+[ext_resource type="PackedScene" uid="uid://b3r7siabdhmll" path="res://component/HealthComponent/health_component.tscn" id="2_i7tlw"]
+[ext_resource type="PackedScene" uid="uid://ddu2w3oaweinj" path="res://entities/props/plane/plane.tscn" id="2_pevt2"]
+[ext_resource type="PackedScene" uid="uid://baxxp6f1xd1x" path="res://entities/Player/smoke/smoke.tscn" id="3_7m4ed"]
+[ext_resource type="PackedScene" uid="uid://bdg1c3q52cld8" path="res://entities/props/cannon/cannon.tscn" id="3_qrfhy"]
+[ext_resource type="PackedScene" uid="uid://mcmb4svps0nx" path="res://component/state_machine/state_machine.tscn" id="6_5uo4p"]
+[ext_resource type="Script" path="res://entities/Player/states/scene.gd" id="7_lo7vy"]
+[ext_resource type="Script" path="res://entities/Player/states/normal.gd" id="8_3mkjt"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_a2iph"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_1rlcc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd7sr"]
+size = Vector2(8, 13)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1re74"]
-size = Vector2(21.6448, 20.9608)
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cannon")]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_bghuu")
-speed = 100
-acceleration = 700
-friction = 300
+cannon = NodePath("cannon")
+metadata/_edit_horizontal_guides_ = [-48.0]
 
-[node name="Cannon" type="Node2D" parent="."]
+[node name="Plane" parent="." instance=ExtResource("2_pevt2")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_i7tlw")]
+
+[node name="cannon" parent="." instance=ExtResource("3_qrfhy")]
 position = Vector2(0, -16)
-script = ExtResource("3_yd084")
-fire_rate = 0.3
-bullet_scene = ExtResource("4_mppoi")
+scale = Vector2(0.99194, 1)
+bullet_speed = 20.0
+bullet_cooldown = 0.05
+bullet_damage = 100
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_a2iph")
+[node name="Smoke" parent="." instance=ExtResource("3_7m4ed")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1.47841, 0.572498)
-shape = SubResource("RectangleShape2D_1re74")
-disabled = true
-debug_color = Color(0, 0.172549, 1, 0.419608)
+shape = SubResource("RectangleShape2D_dd7sr")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_5uo4p")]
+initial_state = NodePath("Scene")
+
+[node name="Scene" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("7_lo7vy")
+player = NodePath("../..")
+
+[node name="Normal" type="Node" parent="StateMachine"]
+script = ExtResource("8_3mkjt")

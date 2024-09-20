@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cabe7r7373inm"]
+
+[ext_resource type="Texture2D" uid="uid://cuwps5r7lm7n0" path="res://assets/tiles_packed.png" id="1_bt2i1"]
+[ext_resource type="Script" path="res://entities/entity.gd" id="1_l0udy"]
+[ext_resource type="PackedScene" uid="uid://b3r7siabdhmll" path="res://component/HealthComponent/health_component.tscn" id="2_pxgvu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1v7bo"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x028m"]
+atlas = ExtResource("1_bt2i1")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lg71w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x028m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Entity" type="CharacterBody2D"]
+script = ExtResource("1_l0udy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1v7bo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lg71w")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_pxgvu")]
+team = 1

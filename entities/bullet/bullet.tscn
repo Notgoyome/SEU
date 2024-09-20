@@ -1,42 +1,60 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3bcptdah4iur"]
+[gd_scene load_steps=8 format=3 uid="uid://brgjgkeko4erp"]
 
-[ext_resource type="Texture2D" uid="uid://bt7o2a01m3bo3" path="res://entities/bullet/assets/bullet.png" id="1_j5jh2"]
+[ext_resource type="Texture2D" uid="uid://cuwps5r7lm7n0" path="res://assets/tiles_packed.png" id="1_gsl46"]
 [ext_resource type="Script" path="res://entities/bullet/bullet.gd" id="1_tu2ys"]
-[ext_resource type="Script" path="res://entities/bullet/movement/Scripts/straight_movement_component.gd" id="3_xputf"]
-[ext_resource type="AudioStream" uid="uid://nlqc5qxwsden" path="res://entities/bullet/assets/shot.wav" id="4_0v66r"]
+[ext_resource type="Script" path="res://component/movement_component/straight.gd" id="3_u1u3d"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ppsa"]
-size = Vector2(16, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otnm0"]
+size = Vector2(6, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1o86c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rprfy"]
+atlas = ExtResource("1_gsl46")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxtrm"]
+atlas = ExtResource("1_gsl46")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bn2pj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_j5jh2")
+"texture": SubResource("AtlasTexture_rprfy")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxtrm")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
 }]
 
 [node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("movement_component")]
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_tu2ys")
-movement_component = NodePath("StraightMovementComponent")
+movement_component = NodePath("Straight")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.00174, 1.00188)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_1ppsa")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_otnm0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_1ppsa")
+shape = SubResource("RectangleShape2D_otnm0")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_1o86c")
+sprite_frames = SubResource("SpriteFrames_bn2pj")
 
-[node name="StraightMovementComponent" type="Node2D" parent="."]
-script = ExtResource("3_xputf")
+[node name="Straight" type="Node" parent="."]
+script = ExtResource("3_u1u3d")
+velocity = Vector2(0, 1)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_0v66r")
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

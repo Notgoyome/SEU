@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3lga5un53nx7"]
+
+[ext_resource type="PackedScene" uid="uid://cabe7r7373inm" path="res://entities/entity.tscn" id="1_bm6cj"]
+[ext_resource type="PackedScene" uid="uid://bdg1c3q52cld8" path="res://entities/props/cannon/cannon.tscn" id="2_hmv4w"]
+[ext_resource type="Script" path="res://entities/enemies/basic_shooter.gd" id="2_md4cm"]
+[ext_resource type="PackedScene" uid="uid://dbbjc31uoea2j" path="res://entities/bullet/bullet_red.tscn" id="4_mvsrb"]
+
+[node name="Entity" instance=ExtResource("1_bm6cj")]
+script = ExtResource("2_md4cm")
+delta_y = 500
+speed = 300
+
+[node name="cannon" parent="." index="3" instance=ExtResource("2_hmv4w")]
+position = Vector2(0, 16)
+cannon_direction = Vector2(0, 1)
+auto_fire = true
+bullet_scene = ExtResource("4_mvsrb")
+bullet_speed = 5.0
+bullet_cooldown = 0.9
+team = 1

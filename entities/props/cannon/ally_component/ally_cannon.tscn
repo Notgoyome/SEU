@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://budh0celdntbl"]
+
+[ext_resource type="PackedScene" uid="uid://bdg1c3q52cld8" path="res://entities/props/cannon/cannon.tscn" id="1_todjy"]
+
+[node name="cannon" instance=ExtResource("1_todjy")]
+bullet_speed = 800.0
+bullet_damage = 50

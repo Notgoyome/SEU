@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlh6kfb67gkfd"]
+
+[ext_resource type="PackedScene" uid="uid://ddu2w3oaweinj" path="res://entities/props/plane/plane.tscn" id="1_gynai"]
+
+[node name="Plane" instance=ExtResource("1_gynai")]
+speed = 400
+friction = 100
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+animation = &"faster"

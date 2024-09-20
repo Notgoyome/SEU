@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://2yn6qwosc1d2"]
+
+[ext_resource type="Script" path="res://menus/text/text_value.gd" id="1_k3bdp"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TextValue" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 39.0
+script = ExtResource("1_k3bdp")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 8.0
+offset_right = 147.0
+offset_bottom = 39.0
+text = "Inventory"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 152.0
+offset_top = 8.0
+offset_right = 235.0
+offset_bottom = 39.0
+text = "Build
+"

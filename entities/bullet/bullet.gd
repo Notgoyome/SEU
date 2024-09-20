@@ -1,50 +1,66 @@
 extends CharacterBody2D
 class_name Bullet
-var active = false
-var timeout : float = 2
-var timeout_timer : Timer
-var speed : float = 500
-var direction = -1
+@export var movement_component: MovementComponent = null
+@export var active: bool = false
 
-@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
-@export var movement_component : MovementComponent
-@onready var audio : AudioStreamPlayer2D = $AudioStreamPlayer2D
-# Called when the node enters the scene tree for the first time.
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+var speed = 0
+var damage = 0
+var cannon_direction = Vector2(0, 1)
+var team_type = Team.TEAM.PLAYER
+
 func _ready() -> void:
-	if movement_component == null:
-		assert(false, "Movement component is not set")
-	sprite.hide()
-	timeout_timer = Timer.new()
-	timeout_timer.set_wait_time(timeout)
-	timeout_timer.set_one_shot(true)
-	timeout_timer.timeout.connect(_on_timeout_timer_timeout)
-	add_child(timeout_timer)
-	pass # Replace with function body.
+	disable()
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !active:
-		return
-	var delta_position = movement_component.get_velocity() * speed * delta * direction
-	print(movement_component.get_velocity())
-	velocity = delta_position
-	move_and_slide()
+	if active:
+		# position += movement_component.get_velocity() * delta * speed * cannon_direction
+		velocity = movement_component.get_velocity() * delta * speed * cannon_direction
+		move_and_slide()
+	if is_outside_camera_view():
+		disable()
 	pass
 
-func activate(global_position) -> void:
-	sprite.show()
-	active = true
-	timeout_timer.start()
-	position = global_position
-	audio.play()
-	pass
-
-func die() -> void:
-	sprite.hide()
+func disable() -> void:
 	active = false
+	sprite.hide()
+	collision_shape.disabled = true
 	pass
 
-func _on_timeout_timer_timeout() -> void:
-	die()
+func shoot(init_global_position: Vector2,
+			team,
+			init_speed = speed,
+			init_damage = damage,
+			init_direction = Vector2(0,1),) -> void:
+
+	global_position = init_global_position
+	team_type = team
+	speed = init_speed
+	damage = init_damage
+	cannon_direction = init_direction
+	active = true
+	sprite.show()
+	collision_shape.disabled = false
 	pass
+
+func is_outside_camera_view():
+	var camera = get_viewport().get_camera_2d()
+	var camera_rect = null
+	var object_position = global_position
+
+	if camera != null:
+		camera_rect = Rect2(camera.global_position - camera.zoom * camera.get_screen_size() / 2, camera.zoom * camera.get_screen_size())
+	else:
+		camera_rect = Rect2(Vector2(), Vector2(get_viewport().get_visible_rect().size))
+	return not camera_rect.has_point(object_position)
+
+
+func _on_area_2d_body_entered(body:Node2D) -> void:
+	if body.has_node("HealthComponent") and body.get_node("HealthComponent").team != team_type:
+		body.get_node("HealthComponent").damage(damage)
+		disable()
+	pass # Replace with function body.
