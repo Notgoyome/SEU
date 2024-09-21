@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj4u7uj61tcpu"]
+
+[ext_resource type="PackedScene" uid="uid://ddu2w3oaweinj" path="res://entities/props/plane/plane.tscn" id="1_36jlt"]
+[ext_resource type="SpriteFrames" uid="uid://306p8i1wi00w" path="res://entities/props/plane/sprite_frames/plane_heavy.tres" id="2_n1pow"]
+
+[node name="Plane" instance=ExtResource("1_36jlt")]
+speed = 100
+friction = 800
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = ExtResource("2_n1pow")

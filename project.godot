@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AirCraft"
-run/main_scene="res://level.tscn"
+run/main_scene="res://menus/build.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]
@@ -19,10 +19,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 Team="*res://globals/team.gd"
 Debug="*res://globals/debug.gd"
 UserData="*res://globals/user_data.gd"
-PlayerGlobal="*res://globals/player_global.gd"
 PlanesGlobal="*res://globals/planes_global.gd"
 FunctionGlobal="*res://globals/function_global.gd"
 TransitionGlobal="*res://globals/transition_global.gd"
+LevelGlobal="*res://globals/level_global.gd"
 
 [display]
 

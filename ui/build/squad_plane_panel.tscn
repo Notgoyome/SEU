@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://gohtmv53lndc"]
+
+[ext_resource type="SpriteFrames" uid="uid://dl3h3n60m5f2k" path="res://entities/props/plane/sprite_frames/plane.tres" id="1_vmffg"]
+[ext_resource type="FontFile" uid="uid://ng2uyaljynmh" path="res://assets/fonts/m5x7.ttf" id="2_cl84u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sipiw"]
+
+[sub_resource type="Theme" id="Theme_bxawy"]
+Panel/styles/panel = SubResource("StyleBoxEmpty_sipiw")
+
+[node name="Panel" type="Panel"]
+custom_minimum_size = Vector2(0, 32)
+theme = SubResource("Theme_bxawy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(22, 16)
+sprite_frames = ExtResource("1_vmffg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_right = 139.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("2_cl84u")
+text = "Azur
+Type : Medium"

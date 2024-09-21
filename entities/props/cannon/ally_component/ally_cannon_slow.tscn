@@ -3,6 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bdg1c3q52cld8" path="res://entities/props/cannon/cannon.tscn" id="1_4s4ng"]
 
 [node name="cannon" instance=ExtResource("1_4s4ng")]
-bullet_speed = 800.0
-bullet_cooldown = 0.5
-bullet_damage = 50
+bullet_speed = 10.0
+bullet_cooldown = 0.15
+bullet_damage = 200

@@ -21,7 +21,7 @@ func change_scene(scene_path: String = "", reload = false) -> void:
     if reload:
         get_tree().reload_current_scene()
     else:
-        get_tree().change_scene(scene_path)
+        get_tree().change_scene_to_file(scene_path)
     await get_tree().process_frame
 
     animation_player.play("end")

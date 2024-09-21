@@ -7,7 +7,7 @@
 position = Vector2(0, -8)
 bullet_scene = ExtResource("2_62wip")
 bullet_cooldown = 0.05
-bullet_damage = 100
+bullet_damage = 50
 
 [node name="CannonParticle" parent="." index="0"]
 scale_amount_min = 0.5
@@ -15,3 +15,4 @@ scale_amount_max = 0.5
 
 [node name="AudioStreamPlayer2D" parent="." index="1"]
 position = Vector2(8, 0)
+pitch_scale = 0.3

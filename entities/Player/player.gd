@@ -54,7 +54,6 @@ func consume() -> void:
 	if plane_temp == null or cannon_temp == null:
 		died = true
 		return
-	print("building")
 	plane = plane_temp
 	add_child(plane)
 	cannon = cannon_temp

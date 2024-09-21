@@ -1,8 +1,8 @@
 extends MovementComponent
 
 var delta_wave = 0.0
-var wave_speed = 50
-var wave_amplitude = 0.2
+var wave_speed = 5
+var wave_amplitude = 0.4
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

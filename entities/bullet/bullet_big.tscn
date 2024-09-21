@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://v4l6jol5p8p7"]
+
+[ext_resource type="PackedScene" uid="uid://brgjgkeko4erp" path="res://entities/bullet/bullet.tscn" id="1_m02mn"]
+[ext_resource type="Texture2D" uid="uid://cuwps5r7lm7n0" path="res://assets/tiles_packed.png" id="2_dnmam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70vgx"]
+size = Vector2(19.9826, 27.9475)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmreg"]
+atlas = ExtResource("2_dnmam")
+region = Rect2(48, 0, 16, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ip8j6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmreg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" instance=ExtResource("1_m02mn")]
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-0.00868466, -0.998124)
+shape = SubResource("RectangleShape2D_70vgx")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ip8j6")
