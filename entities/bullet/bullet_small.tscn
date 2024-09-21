@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4qksbmkcaeo7"]
+
+[ext_resource type="Script" path="res://entities/bullet/bullet.gd" id="1_3c8cp"]
+[ext_resource type="Texture2D" uid="uid://cuwps5r7lm7n0" path="res://assets/tiles_packed.png" id="2_tf4bw"]
+[ext_resource type="Script" path="res://component/movement_component/straight.gd" id="3_vuoos"]
+[ext_resource type="Script" path="res://component/movement_component/normal.gd" id="4_6mvl8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otnm0"]
+size = Vector2(10.4844, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3c75"]
+atlas = ExtResource("2_tf4bw")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6rjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3c75")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("movement_component")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_3c8cp")
+movement_component = NodePath("Normal")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.00174, 1.00188)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_otnm0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_otnm0")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m6rjj")
+
+[node name="Straight" type="Node" parent="."]
+script = ExtResource("3_vuoos")
+velocity = Vector2(0, 1)
+
+[node name="Normal" type="Node" parent="."]
+script = ExtResource("4_6mvl8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

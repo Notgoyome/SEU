@@ -9,7 +9,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func get_velocity() -> Vector2:
+func get_velocity(vector) -> Vector2:
 	return velocity
 
 func get_rotation_value() -> float:

@@ -1,26 +1,41 @@
 extends Node
 
 var planes = {
-	"light": {"sprite_frames":"res://entities/props/plane/sprite_frames/plane.tres",
-			"speed": 200, "acceleration": 700, "friction":250, "health": 1},
-
-	"medium": {"sprite_frames":"res://entities/props/plane/sprite_frames/plane.tres",
-			"speed": 150, "acceleration": 500, "friction":500, "health": 2},
+	"light": "res://entities/props/plane/plane_light.tscn",
+	"medium": "res://entities/props/plane/plane_medium.tscn",
 }
 
 var cannons = {
-	"medium" : {"bullet":"res://entities/bullet/bullet.tscn",
-			"bullet_speed": 200, "bullet_cooldown": 0.1, "bullet_damage": 1, "bullet_pool_size": 50},
-	"heavy" : {"bullet":"res://entities/bullet/bullet.tscn",
-			"bullet_speed": 200, "bullet_cooldown": 0.5, "bullet_damage": 6, "bullet_pool_size": 10},
+	"light" : "res://entities/props/cannon/ally_component/ally_cannon_light.tscn",
+	"heavy" : "res://entities/props/cannon/ally_component/cannon_wave.tscn"
 }
 
-
-var selected_plane = "light"
-var selected_cannon = "medium"
+var score = 0
+var selected_plane_list_string = ["light", "medium", "light"]
+var selected_cannon_list_string = ["heavy", "light", "light"]
 
 func _ready() -> void:
 	pass
+
+func build():
+	var selected_plane_list = []
+	var selected_cannon_list : Array[Cannon] = []
+
+	for plane in selected_plane_list:
+		if plane != null:
+			plane.queue_free()
+	for cannon in selected_cannon_list:
+		if cannon != null:
+			cannon.queue_free()
+	for plane_string in selected_plane_list_string:
+		var plane_scene = load(planes[plane_string])
+		var plane = plane_scene.instantiate()
+		selected_plane_list.append(plane)
+	for cannon_string in selected_cannon_list_string:
+		var cannon_scene = load(cannons[cannon_string])
+		var cannon = cannon_scene.instantiate()
+		selected_cannon_list.append(cannon)
+	return [selected_plane_list, selected_cannon_list]
 
 func _process(delta: float) -> void:
 	pass
@@ -30,6 +45,3 @@ func save_inventory() -> void:
 
 func load_inventory() -> void:
 	var save_file = FileAccess.open("user_data.gd", FileAccess.READ)
-
-func get_build():
-	return [selected_plane, selected_cannon]

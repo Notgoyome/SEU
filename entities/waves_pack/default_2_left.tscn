@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmmd6dsiobdse"]
+
+[ext_resource type="PackedScene" uid="uid://bi3hl58rk1b2u" path="res://component/wave_manager/wave_manager.tscn" id="1_5h36d"]
+[ext_resource type="PackedScene" uid="uid://clrrrat5q7qww" path="res://entities/enemies/default/default.tscn" id="2_q3yhi"]
+
+[node name="default_1" instance=ExtResource("1_5h36d")]
+
+[node name="Entity2" parent="." index="0" instance=ExtResource("2_q3yhi")]
+position = Vector2(48, 48)
+
+[node name="StartPosition" parent="Entity2" index="6"]
+position = Vector2(-176, 0)
+
+[node name="Entity3" parent="." index="1" instance=ExtResource("2_q3yhi")]
+position = Vector2(72, 48)
+
+[node name="StartPosition" parent="Entity3" index="6"]
+position = Vector2(-176, 0)
+
+[node name="Entity4" parent="." index="2" instance=ExtResource("2_q3yhi")]
+position = Vector2(96, 48)
+
+[node name="StartPosition" parent="Entity4" index="6"]
+position = Vector2(-176, 0)
+
+[node name="Entity5" parent="." index="3" instance=ExtResource("2_q3yhi")]
+position = Vector2(48, 24)
+
+[node name="StartPosition" parent="Entity5" index="6"]
+position = Vector2(-176, 0)
+
+[node name="Entity6" parent="." index="4" instance=ExtResource("2_q3yhi")]
+position = Vector2(72, 24)
+
+[node name="StartPosition" parent="Entity6" index="6"]
+position = Vector2(-176, 0)
+
+[node name="Entity7" parent="." index="5" instance=ExtResource("2_q3yhi")]
+position = Vector2(96, 24)
+
+[node name="StartPosition" parent="Entity7" index="6"]
+position = Vector2(-176, 0)
+
+[connection signal="signal_dead" from="Entity2/HealthComponent" to="Entity2/CPUParticles2D2" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity2/HealthComponent" to="Entity2/cannon" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity3/HealthComponent" to="Entity3/CPUParticles2D2" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity3/HealthComponent" to="Entity3/cannon" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity4/HealthComponent" to="Entity4/CPUParticles2D2" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity4/HealthComponent" to="Entity4/cannon" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity5/HealthComponent" to="Entity5/CPUParticles2D2" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity5/HealthComponent" to="Entity5/cannon" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity6/HealthComponent" to="Entity6/CPUParticles2D2" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity6/HealthComponent" to="Entity6/cannon" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity7/HealthComponent" to="Entity7/CPUParticles2D2" method="_on_health_component_signal_dead"]
+[connection signal="signal_dead" from="Entity7/HealthComponent" to="Entity7/cannon" method="_on_health_component_signal_dead"]
+
+[editable path="Entity2"]
+[editable path="Entity2/cannon"]
+[editable path="Entity3"]
+[editable path="Entity3/cannon"]
+[editable path="Entity4"]
+[editable path="Entity4/cannon"]
+[editable path="Entity5"]
+[editable path="Entity5/cannon"]
+[editable path="Entity6"]
+[editable path="Entity6/cannon"]
+[editable path="Entity7"]
+[editable path="Entity7/cannon"]

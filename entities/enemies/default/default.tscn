@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://clrrrat5q7qww"]
+
+[ext_resource type="PackedScene" uid="uid://cabe7r7373inm" path="res://entities/entity.tscn" id="1_r54n0"]
+[ext_resource type="Script" path="res://entities/enemies/default/cpu_particles_2d_2.gd" id="2_gk0js"]
+[ext_resource type="Script" path="res://entities/enemies/states/enter.gd" id="2_np6o0"]
+[ext_resource type="Script" path="res://entities/enemies/states/normal.gd" id="3_p7w6c"]
+[ext_resource type="PackedScene" uid="uid://bx8jvckmjurgl" path="res://entities/props/cannon/enemy_cannon/ennemy_cannon.tscn" id="5_mbwdp"]
+[ext_resource type="Script" path="res://entities/enemies/default/start_position.gd" id="6_devah"]
+[ext_resource type="PackedScene" uid="uid://j6lyf2tvbrve" path="res://entities/bullet/bullet_round.tscn" id="7_lpvfo"]
+[ext_resource type="Script" path="res://entities/props/cannon/component/cannon_target_player_component.gd" id="7_ps0sk"]
+[ext_resource type="AudioStream" uid="uid://c8aubqprj2c3t" path="res://entities/enemies/default/retro_die_01.ogg" id="12_7e0p5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fidvg"]
+load_path = "res://.godot/imported/ship_0023.png-5f00a445ddeb17289951a67f1acf0c52.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ihl3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_fidvg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_d7e23"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_31bwk"]
+load_path = "res://.godot/imported/ship_0000.png-14023ca36e088696ab903b615590895f.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7giod"]
+load_path = "res://.godot/imported/ship_0006.png-50b8da34db17cc386b9889101d2fb620.ctex"
+
+[node name="Entity" node_paths=PackedStringArray("collision_shapes") instance=ExtResource("1_r54n0")]
+collision_shapes = [NodePath("CollisionShape2D")]
+score = 25
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_0ihl3")
+flip_v = true
+
+[node name="HealthComponent" parent="." index="2"]
+position = Vector2(-8, 0)
+
+[node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Enter")
+
+[node name="Enter" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("start_position", "entity")]
+script = ExtResource("2_np6o0")
+start_position = NodePath("../../StartPosition")
+entity = NodePath("../..")
+
+[node name="Normal" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("end_position", "entity")]
+script = ExtResource("3_p7w6c")
+end_position = NodePath("../../EndPosition")
+entity = NodePath("../..")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="4"]
+emitting = false
+amount = 30
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 40.0
+scale_amount_max = 3.0
+color = Color(0.382454, 0.430865, 0.541112, 1)
+color_ramp = SubResource("Gradient_d7e23")
+script = ExtResource("2_gk0js")
+
+[node name="cannon" parent="." index="5" instance=ExtResource("5_mbwdp")]
+cannon_direction = Vector2(0, 1)
+auto_fire = true
+bullet_scene = ExtResource("7_lpvfo")
+bullet_speed = 5.0
+bullet_cooldown = 0.5
+can_shoot = false
+team = 1
+
+[node name="CannonTargetPlayerComponent" type="Node2D" parent="cannon" index="0" node_paths=PackedStringArray("cannon")]
+script = ExtResource("7_ps0sk")
+cannon = NodePath("..")
+
+[node name="CannonParticle" parent="cannon" index="1"]
+visible = false
+
+[node name="AudioStreamPlayer2D" parent="cannon" index="2"]
+volume_db = -20.0
+pitch_scale = 0.4
+
+[node name="StartPosition" type="Sprite2D" parent="." index="6"]
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_31bwk")
+script = ExtResource("6_devah")
+
+[node name="EndPosition" type="Sprite2D" parent="." index="7"]
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_7giod")
+script = ExtResource("6_devah")
+
+[node name="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("12_7e0p5")
+volume_db = -5.0
+pitch_scale = 0.5
+
+[connection signal="die_from_damage" from="HealthComponent" to="CPUParticles2D2" method="_on_health_component_die_from_damage"]
+[connection signal="signal_dead" from="HealthComponent" to="cannon" method="_on_health_component_signal_dead"]
+[connection signal="normal_entered" from="StateMachine/Normal" to="cannon" method="_on_normal_normal_entered"]
+
+[editable path="cannon"]

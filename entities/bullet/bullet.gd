@@ -5,30 +5,41 @@ class_name Bullet
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-
+@onready var collision_shape_area : CollisionShape2D = $Area2D/CollisionShape2D
+@export var bounce_step = 0
+var bounce_index = 0
 var speed = 0
 var damage = 0
 var cannon_direction = Vector2(0, 1)
 var team_type = Team.TEAM.PLAYER
-
+var die_next_turn = false
 func _ready() -> void:
 	disable()
 	pass
 
 
 func _process(delta: float) -> void:
-	if active:
-		# position += movement_component.get_velocity() * delta * speed * cannon_direction
-		velocity = movement_component.get_velocity() * delta * speed * cannon_direction
-		move_and_slide()
-	if is_outside_camera_view():
-		disable()
+	if !active:
+		return
+
+	velocity = movement_component.get_velocity(cannon_direction) * delta * speed
+	rotate(movement_component.get_rotation_value() * delta)
+	move_and_slide()
+	if FunctionGlobal.is_outside_camera_view(global_position):
+		if bounce_index == bounce_step:
+			disable()
+			return
+		else:
+			bounce_index += 1
+			movement_component.bounce(cannon_direction) #PIN TO DO
+	
 	pass
 
 func disable() -> void:
 	active = false
 	sprite.hide()
 	collision_shape.disabled = true
+	collision_shape_area.disabled = true
 	pass
 
 func shoot(init_global_position: Vector2,
@@ -36,7 +47,7 @@ func shoot(init_global_position: Vector2,
 			init_speed = speed,
 			init_damage = damage,
 			init_direction = Vector2(0,1),) -> void:
-
+	bounce_index = 0
 	global_position = init_global_position
 	team_type = team
 	speed = init_speed
@@ -45,21 +56,13 @@ func shoot(init_global_position: Vector2,
 	active = true
 	sprite.show()
 	collision_shape.disabled = false
+	collision_shape_area.disabled = false
 	pass
-
-func is_outside_camera_view():
-	var camera = get_viewport().get_camera_2d()
-	var camera_rect = null
-	var object_position = global_position
-
-	if camera != null:
-		camera_rect = Rect2(camera.global_position - camera.zoom * camera.get_screen_size() / 2, camera.zoom * camera.get_screen_size())
-	else:
-		camera_rect = Rect2(Vector2(), Vector2(get_viewport().get_visible_rect().size))
-	return not camera_rect.has_point(object_position)
 
 
 func _on_area_2d_body_entered(body:Node2D) -> void:
+	if collision_shape_area.disabled:
+		return
 	if body.has_node("HealthComponent") and body.get_node("HealthComponent").team != team_type:
 		body.get_node("HealthComponent").damage(damage)
 		disable()

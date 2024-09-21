@@ -13,8 +13,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func get_velocity() -> Vector2:
+func get_velocity(vector) -> Vector2:
 	return Vector2()
 
 func get_rotation_value() -> float:
 	return 0.0
+
+func bounce(vector) -> void:
+	pass

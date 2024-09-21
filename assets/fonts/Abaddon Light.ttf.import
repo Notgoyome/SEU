@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://did6ptlatn2mn"
-path="res://.godot/imported/PublicPixel.otf-12fecd2e56b6cbe3dcfc36a50b6bd634.fontdata"
+uid="uid://v2heppfl4vkt"
+path="res://.godot/imported/Abaddon Light.ttf-dee2e5c6e03aecc907c1339eebee6ffc.fontdata"
 
 [deps]
 
-source_file="res://assets/PublicPixel.otf"
-dest_files=["res://.godot/imported/PublicPixel.otf-12fecd2e56b6cbe3dcfc36a50b6bd634.fontdata"]
+source_file="res://assets/fonts/Abaddon Light.ttf"
+dest_files=["res://.godot/imported/Abaddon Light.ttf-dee2e5c6e03aecc907c1339eebee6ffc.fontdata"]
 
 [params]
 

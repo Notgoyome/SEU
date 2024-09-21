@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1vng3hfswxww"]
+
+[ext_resource type="Script" path="res://component/wave_manager/wave_manager.gd" id="1_yd4tj"]
+[ext_resource type="PackedScene" uid="uid://ddb52jub72j4d" path="res://entities/waves_pack/default_4.tscn" id="2_x0knx"]
+[ext_resource type="PackedScene" uid="uid://bfjoraqkak8wy" path="res://entities/waves_pack/default_5.tscn" id="3_l4jip"]
+
+[node name="WaveManager2" type="Node2D" node_paths=PackedStringArray("depend_on")]
+position = Vector2(16, 16)
+script = ExtResource("1_yd4tj")
+duration = 2.0
+depend_on = NodePath("")
+
+[node name="default_4" parent="." instance=ExtResource("2_x0knx")]
+position = Vector2(0, 0)
+duration = 0.0
+
+[node name="default_1" parent="." instance=ExtResource("3_l4jip")]
+position = Vector2(0, 0)

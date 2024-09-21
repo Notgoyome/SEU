@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://j6lyf2tvbrve"]
+
+[ext_resource type="PackedScene" uid="uid://brgjgkeko4erp" path="res://entities/bullet/bullet.tscn" id="1_a8omf"]
+[ext_resource type="Texture2D" uid="uid://cxvmrorfnav3c" path="res://entities/bullet/bullet_asset/red.png" id="2_7dcwe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8o7jv"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4pk5"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70m0s"]
+atlas = ExtResource("2_7dcwe")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovkdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70m0s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" instance=ExtResource("1_a8omf")]
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-1.78503e-07, 1.78478e-07)
+shape = SubResource("CircleShape2D_8o7jv")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_d4pk5")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_ovkdb")
+
+[node name="Normal" parent="." index="4"]
+auto_rotate = true
+rotation_speed = 1.0

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx8jvckmjurgl"]
+
+[ext_resource type="PackedScene" uid="uid://bdg1c3q52cld8" path="res://entities/props/cannon/cannon.tscn" id="1_0kkha"]
+
+[node name="cannon" instance=ExtResource("1_0kkha")]
+bullet_pool_size = 10
+
+[node name="AudioStreamPlayer2D" parent="." index="1"]
+volume_db = -10.0
+pitch_scale = 0.6

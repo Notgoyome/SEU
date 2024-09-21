@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxh1jyh7wedgw"]
+
+[ext_resource type="PackedScene" uid="uid://bdg1c3q52cld8" path="res://entities/props/cannon/cannon.tscn" id="1_43r1d"]
+[ext_resource type="PackedScene" uid="uid://c4qksbmkcaeo7" path="res://entities/bullet/bullet_small.tscn" id="2_62wip"]
+
+[node name="cannon" instance=ExtResource("1_43r1d")]
+position = Vector2(0, -8)
+bullet_scene = ExtResource("2_62wip")
+bullet_cooldown = 0.05
+bullet_damage = 100
+
+[node name="CannonParticle" parent="." index="0"]
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="AudioStreamPlayer2D" parent="." index="1"]
+position = Vector2(8, 0)

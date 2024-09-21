@@ -21,7 +21,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if current_state:
-		# print("Processing ", current_state.name)
 		current_state.process(delta)
 	pass
 
@@ -30,14 +29,13 @@ func _physics_process(delta: float) -> void:
 		current_state.physic_process(delta)
 
 func on_state_transition(state: State, new_state_name: String) -> void:
-	print("Transitioning from ", state.name, " to ", new_state_name)
 	if state != current_state:
 		return
+		
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
 		return
 	if current_state:
-		print(state, " exiting")
 		current_state.exit()
 	new_state.enter()
 	current_state = new_state
