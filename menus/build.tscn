@@ -1362,6 +1362,7 @@ theme = SubResource("Theme_lmplu")
 script = ExtResource("6_f1wxp")
 
 [node name="Start" type="NinePatchRect" parent="Button"]
+layout_mode = 0
 offset_right = 154.0
 offset_bottom = 36.0
 texture = ExtResource("3_o361t")
@@ -1372,6 +1373,7 @@ patch_margin_right = 3
 patch_margin_bottom = 3
 
 [node name="Label" type="Label" parent="Button/Start"]
+layout_mode = 0
 offset_right = 154.0
 offset_bottom = 36.0
 theme_override_fonts/font = ExtResource("6_4rvlw")

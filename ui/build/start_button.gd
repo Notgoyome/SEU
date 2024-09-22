@@ -18,7 +18,7 @@ func _on_pressed() -> void:
 func _on_button_up() -> void:
 	var color = "ffffff"
 	modulate = Color(color)
-	LevelGlobal.launch_level()
+	LevelGlobal.start()
 	pass # Replace with function body.
 
 

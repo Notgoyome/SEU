@@ -3,7 +3,8 @@ extends AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	play("new_animation")
+	if LevelGlobal.selected_level == 0:
+		play("new_animation")
 	pass # Replace with function body.
 
 

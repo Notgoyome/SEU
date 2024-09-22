@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://ddu2w3oaweinj" path="res://entities/props/plane/plane.tscn" id="1_cybsw"]
 
 [node name="Plane" instance=ExtResource("1_cybsw")]
+speed = 150
+acceleration = 500
+friction = 400

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8sovydtqyadr"]
+[gd_scene load_steps=17 format=3 uid="uid://b8sovydtqyadr"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_bghuu"]
 [ext_resource type="PackedScene" uid="uid://b3r7siabdhmll" path="res://component/HealthComponent/health_component.tscn" id="2_i7tlw"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://entities/Player/states/lose.gd" id="10_62jxq"]
 [ext_resource type="AudioStream" uid="uid://dhrq80lyehywe" path="res://entities/Player/assets/retro_die_03.ogg" id="10_srsl7"]
 [ext_resource type="Script" path="res://entities/Player/die_sound.gd" id="11_3ond8"]
+[ext_resource type="Script" path="res://entities/Player/states/win.gd" id="11_f8oql"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eiqfl"]
 shader = ExtResource("3_k0gpq")
@@ -78,6 +79,10 @@ player = NodePath("../..")
 
 [node name="Normal" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("10_8qt0h")
+player = NodePath("../..")
+
+[node name="Win" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("11_f8oql")
 player = NodePath("../..")
 
 [node name="Label" type="Label" parent="."]

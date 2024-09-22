@@ -1,0 +1,482 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ugtbsdpn3f2"]
+
+[ext_resource type="PackedScene" uid="uid://dxm5pm1gts11i" path="res://scenes/level/level.tscn" id="1_t0ffg"]
+[ext_resource type="PackedScene" uid="uid://bi3hl58rk1b2u" path="res://component/wave_manager/wave_manager.tscn" id="2_5qf56"]
+[ext_resource type="PackedScene" uid="uid://beye6ll082pev" path="res://entities/enemies/straight_plane.tscn" id="3_aakik"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0gril"]
+load_path = "res://.godot/imported/ship_0000.png-14023ca36e088696ab903b615590895f.ctex"
+
+[node name="Node2D" instance=ExtResource("1_t0ffg")]
+
+[node name="PlayerAreaDetector" parent="." index="5"]
+position = Vector2(-402, -160)
+
+[node name="WaveManager" parent="." index="6" instance=ExtResource("2_5qf56")]
+visible = false
+
+[node name="Entity" parent="WaveManager" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(104, 24)
+
+[node name="Normal" parent="WaveManager/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager/Entity" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager/Entity" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="Entity2" parent="WaveManager" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(223, 24)
+
+[node name="Normal" parent="WaveManager/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager/Entity2" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager/Entity2" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="Entity3" parent="WaveManager" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(185, 24)
+
+[node name="Normal" parent="WaveManager/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager/Entity3" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager/Entity3" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="Entity4" parent="WaveManager" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(145, 24)
+
+[node name="Normal" parent="WaveManager/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager/Entity4" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager/Entity4" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="WaveManager8" parent="." index="7" instance=ExtResource("2_5qf56")]
+position = Vector2(72, 0)
+duration = 2.0
+
+[node name="WaveManager2" parent="WaveManager8" index="0" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+duration = 3.0
+depend_on = NodePath("../../WaveManager")
+
+[node name="Entity" parent="WaveManager8/WaveManager2" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity" index="7"]
+position = Vector2(235.2, -1.8)
+
+[node name="Entity2" parent="WaveManager8/WaveManager2" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity2" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity2" index="7"]
+position = Vector2(162.2, -4.8)
+
+[node name="Entity3" parent="WaveManager8/WaveManager2" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity3" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity3" index="7"]
+position = Vector2(162.2, -4.8)
+
+[node name="Entity4" parent="WaveManager8/WaveManager2" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity4" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity4" index="7"]
+position = Vector2(235.2, -1.8)
+
+[node name="WaveManager3" parent="WaveManager8" index="1" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+position = Vector2(-168, 0)
+duration = 3.0
+depend_on = NodePath("../../WaveManager")
+
+[node name="Entity" parent="WaveManager8/WaveManager3" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager3/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager3/Entity" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager3/Entity" index="7"]
+position = Vector2(420.2, -1.8)
+
+[node name="Entity2" parent="WaveManager8/WaveManager3" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager3/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager3/Entity2" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager3/Entity2" index="7"]
+position = Vector2(281.2, -4.79999)
+
+[node name="Entity3" parent="WaveManager8/WaveManager3" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager3/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager3/Entity3" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager3/Entity3" index="7"]
+position = Vector2(354.2, -1.79999)
+
+[node name="Entity4" parent="WaveManager8/WaveManager3" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager3/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager3/Entity4" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager3/Entity4" index="7"]
+position = Vector2(347.2, -4.8)
+
+[node name="WaveManager4" parent="WaveManager8" index="2" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+position = Vector2(-336, 0)
+duration = 3.0
+depend_on = NodePath("../../WaveManager")
+
+[node name="Entity" parent="WaveManager8/WaveManager4" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager4/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager4/Entity" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager4/Entity" index="7"]
+position = Vector2(539.2, -1.79999)
+
+[node name="Entity2" parent="WaveManager8/WaveManager4" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager4/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager4/Entity2" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager4/Entity2" index="7"]
+position = Vector2(466.2, -4.79999)
+
+[node name="Entity3" parent="WaveManager8/WaveManager4" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager4/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager4/Entity3" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager4/Entity3" index="7"]
+position = Vector2(466.2, -4.79999)
+
+[node name="Entity4" parent="WaveManager8/WaveManager4" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager4/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager4/Entity4" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager4/Entity4" index="7"]
+position = Vector2(539.2, -1.79999)
+
+[node name="WaveManager9" parent="." index="8" instance=ExtResource("2_5qf56")]
+position = Vector2(248, 40)
+scale = Vector2(-1, 1)
+duration = 2.6
+
+[node name="WaveManager2" parent="WaveManager9" index="0" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+duration = 3.0
+depend_on = NodePath("../../WaveManager")
+
+[node name="Entity" parent="WaveManager9/WaveManager2" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager2/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager2/Entity" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager2/Entity" index="7"]
+position = Vector2(229.8, -4.8)
+
+[node name="Entity2" parent="WaveManager9/WaveManager2" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager2/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager2/Entity2" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager2/Entity2" index="7"]
+position = Vector2(173.8, -4.8)
+
+[node name="Entity3" parent="WaveManager9/WaveManager2" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager2/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager2/Entity3" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager2/Entity3" index="7"]
+position = Vector2(173.8, -4.8)
+
+[node name="Entity4" parent="WaveManager9/WaveManager2" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager2/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager2/Entity4" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager2/Entity4" index="7"]
+position = Vector2(229.8, -4.8)
+
+[node name="WaveManager3" parent="WaveManager9" index="1" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+position = Vector2(-168, 0)
+duration = 3.0
+depend_on = NodePath("../../WaveManager")
+
+[node name="Entity" parent="WaveManager9/WaveManager3" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager3/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager3/Entity" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager3/Entity" index="7"]
+position = Vector2(411.2, -4.8)
+
+[node name="Entity2" parent="WaveManager9/WaveManager3" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager3/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager3/Entity2" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager3/Entity2" index="7"]
+position = Vector2(301.8, -1.79999)
+
+[node name="Entity3" parent="WaveManager9/WaveManager3" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager3/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager3/Entity3" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager3/Entity3" index="7"]
+position = Vector2(357.8, -1.79999)
+
+[node name="Entity4" parent="WaveManager9/WaveManager3" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager3/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager3/Entity4" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager3/Entity4" index="7"]
+position = Vector2(355.2, -4.8)
+
+[node name="WaveManager4" parent="WaveManager9" index="2" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+position = Vector2(-336, 0)
+duration = 3.0
+depend_on = NodePath("../../WaveManager")
+
+[node name="Entity" parent="WaveManager9/WaveManager4" index="0" instance=ExtResource("3_aakik")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager4/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager4/Entity" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager4/Entity" index="7"]
+position = Vector2(539.2, -1.79999)
+
+[node name="Entity2" parent="WaveManager9/WaveManager4" index="1" instance=ExtResource("3_aakik")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager4/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager4/Entity2" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager4/Entity2" index="7"]
+position = Vector2(483.2, -1.79999)
+
+[node name="Entity3" parent="WaveManager9/WaveManager4" index="2" instance=ExtResource("3_aakik")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager4/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager4/Entity3" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager4/Entity3" index="7"]
+position = Vector2(483.2, -1.79999)
+
+[node name="Entity4" parent="WaveManager9/WaveManager4" index="3" instance=ExtResource("3_aakik")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager9/WaveManager4/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager9/WaveManager4/Entity4" index="6"]
+position = Vector2(-172.8, -1.8)
+texture = SubResource("CompressedTexture2D_0gril")
+
+[node name="EndPosition" parent="WaveManager9/WaveManager4/Entity4" index="7"]
+position = Vector2(539.2, -1.79999)
+
+[node name="WinWave" parent="." index="9" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_5qf56")]
+duration = 0.0
+depend_on = NodePath("../WaveManager9")
+depend_on_start = false
+winning_wave = true
+
+[editable path="Player"]
+[editable path="Player/PlanePlaceHolder"]
+[editable path="WaveManager/Entity"]
+[editable path="WaveManager/Entity/cannon"]
+[editable path="WaveManager/Entity2"]
+[editable path="WaveManager/Entity2/cannon"]
+[editable path="WaveManager/Entity3"]
+[editable path="WaveManager/Entity3/cannon"]
+[editable path="WaveManager/Entity4"]
+[editable path="WaveManager/Entity4/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity"]
+[editable path="WaveManager8/WaveManager2/Entity/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity2"]
+[editable path="WaveManager8/WaveManager2/Entity2/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity3"]
+[editable path="WaveManager8/WaveManager2/Entity3/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity4"]
+[editable path="WaveManager8/WaveManager2/Entity4/cannon"]
+[editable path="WaveManager8/WaveManager3/Entity"]
+[editable path="WaveManager8/WaveManager3/Entity/cannon"]
+[editable path="WaveManager8/WaveManager3/Entity2"]
+[editable path="WaveManager8/WaveManager3/Entity2/cannon"]
+[editable path="WaveManager8/WaveManager3/Entity3"]
+[editable path="WaveManager8/WaveManager3/Entity3/cannon"]
+[editable path="WaveManager8/WaveManager3/Entity4"]
+[editable path="WaveManager8/WaveManager3/Entity4/cannon"]
+[editable path="WaveManager8/WaveManager4/Entity"]
+[editable path="WaveManager8/WaveManager4/Entity/cannon"]
+[editable path="WaveManager8/WaveManager4/Entity2"]
+[editable path="WaveManager8/WaveManager4/Entity2/cannon"]
+[editable path="WaveManager8/WaveManager4/Entity3"]
+[editable path="WaveManager8/WaveManager4/Entity3/cannon"]
+[editable path="WaveManager8/WaveManager4/Entity4"]
+[editable path="WaveManager8/WaveManager4/Entity4/cannon"]
+[editable path="WaveManager9/WaveManager2/Entity"]
+[editable path="WaveManager9/WaveManager2/Entity/cannon"]
+[editable path="WaveManager9/WaveManager2/Entity2"]
+[editable path="WaveManager9/WaveManager2/Entity2/cannon"]
+[editable path="WaveManager9/WaveManager2/Entity3"]
+[editable path="WaveManager9/WaveManager2/Entity3/cannon"]
+[editable path="WaveManager9/WaveManager2/Entity4"]
+[editable path="WaveManager9/WaveManager2/Entity4/cannon"]
+[editable path="WaveManager9/WaveManager3/Entity"]
+[editable path="WaveManager9/WaveManager3/Entity/cannon"]
+[editable path="WaveManager9/WaveManager3/Entity2"]
+[editable path="WaveManager9/WaveManager3/Entity2/cannon"]
+[editable path="WaveManager9/WaveManager3/Entity3"]
+[editable path="WaveManager9/WaveManager3/Entity3/cannon"]
+[editable path="WaveManager9/WaveManager3/Entity4"]
+[editable path="WaveManager9/WaveManager3/Entity4/cannon"]
+[editable path="WaveManager9/WaveManager4/Entity"]
+[editable path="WaveManager9/WaveManager4/Entity/cannon"]
+[editable path="WaveManager9/WaveManager4/Entity2"]
+[editable path="WaveManager9/WaveManager4/Entity2/cannon"]
+[editable path="WaveManager9/WaveManager4/Entity3"]
+[editable path="WaveManager9/WaveManager4/Entity3/cannon"]
+[editable path="WaveManager9/WaveManager4/Entity4"]
+[editable path="WaveManager9/WaveManager4/Entity4/cannon"]

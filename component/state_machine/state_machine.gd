@@ -28,10 +28,14 @@ func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physic_process(delta)
 
+func change_state(new_state_name: String) -> void:
+	var current_state_name = states.get(current_state.name.to_lower())
+	on_state_transition(current_state, new_state_name)
+
 func on_state_transition(state: State, new_state_name: String) -> void:
 	if state != current_state:
 		return
-		
+	
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
 		return

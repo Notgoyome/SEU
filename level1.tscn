@@ -1,0 +1,263 @@
+[gd_scene load_steps=13 format=3 uid="uid://pfybh2ktam4s"]
+
+[ext_resource type="PackedScene" uid="uid://c3rfbt82ry5pt" path="res://scenes/parallax_manager.tscn" id="1_1vgnq"]
+[ext_resource type="PackedScene" uid="uid://b8sovydtqyadr" path="res://entities/Player/player.tscn" id="2_2h45i"]
+[ext_resource type="PackedScene" uid="uid://bi3hl58rk1b2u" path="res://component/wave_manager/wave_manager.tscn" id="3_0u2nx"]
+[ext_resource type="PackedScene" uid="uid://beye6ll082pev" path="res://entities/enemies/straight_plane.tscn" id="8_dtl47"]
+[ext_resource type="Texture2D" uid="uid://corp601jwoy44" path="res://assets/cube.png" id="9_ibd45"]
+[ext_resource type="FontFile" uid="uid://ng2uyaljynmh" path="res://assets/fonts/m5x7.ttf" id="10_i15d8"]
+[ext_resource type="Script" path="res://ui/score.gd" id="11_h23sf"]
+[ext_resource type="Script" path="res://ui/level_ui/bar.gd" id="12_8gtes"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_31bwk"]
+load_path = "res://.godot/imported/ship_0000.png-14023ca36e088696ab903b615590895f.ctex"
+
+[sub_resource type="Animation" id="Animation_08lcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-64, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wib1m"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(320, 0), Vector2(256, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.42, 1),
+"update": 0,
+"values": [Vector2(-64, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xk3yj"]
+_data = {
+"RESET": SubResource("Animation_08lcn"),
+"new_animation": SubResource("Animation_wib1m")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="parallax_manager" parent="." instance=ExtResource("1_1vgnq")]
+
+[node name="Player" parent="." instance=ExtResource("2_2h45i")]
+position = Vector2(160, 216)
+
+[node name="Scene" parent="Player/StateMachine" index="0"]
+duration = 1.0
+
+[node name="WaveManager8" parent="." instance=ExtResource("3_0u2nx")]
+duration = 2.0
+
+[node name="WaveManager" parent="WaveManager8" instance=ExtResource("3_0u2nx")]
+visible = false
+
+[node name="Entity" parent="WaveManager8/WaveManager" instance=ExtResource("8_dtl47")]
+position = Vector2(104, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager/Entity" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager/Entity" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="Entity2" parent="WaveManager8/WaveManager" instance=ExtResource("8_dtl47")]
+position = Vector2(223, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager/Entity2" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager/Entity2" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="Entity3" parent="WaveManager8/WaveManager" instance=ExtResource("8_dtl47")]
+position = Vector2(185, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager/Entity3" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager/Entity3" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="Entity4" parent="WaveManager8/WaveManager" instance=ExtResource("8_dtl47")]
+position = Vector2(145, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager/Entity4" index="6"]
+position = Vector2(1.90735e-06, -47.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager/Entity4" index="7"]
+position = Vector2(1.90735e-06, 235.2)
+
+[node name="WaveManager2" parent="WaveManager8" node_paths=PackedStringArray("depend_on") instance=ExtResource("3_0u2nx")]
+duration = 3.0
+depend_on = NodePath("../WaveManager")
+
+[node name="Entity" parent="WaveManager8/WaveManager2" instance=ExtResource("8_dtl47")]
+position = Vector2(32, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity" index="6"]
+position = Vector2(-167.8, -1.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity" index="7"]
+position = Vector2(339.2, -1.79999)
+
+[node name="Entity2" parent="WaveManager8/WaveManager2" instance=ExtResource("8_dtl47")]
+position = Vector2(151, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity2/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity2" index="6"]
+position = Vector2(-167.8, -1.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity2" index="7"]
+position = Vector2(339.2, -1.79999)
+
+[node name="Entity3" parent="WaveManager8/WaveManager2" instance=ExtResource("8_dtl47")]
+position = Vector2(113, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity3/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity3" index="6"]
+position = Vector2(-167.8, -1.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity3" index="7"]
+position = Vector2(339.2, -1.79999)
+
+[node name="Entity4" parent="WaveManager8/WaveManager2" instance=ExtResource("8_dtl47")]
+position = Vector2(73, 24)
+
+[node name="Normal" parent="WaveManager8/WaveManager2/Entity4/StateMachine" index="1"]
+speed = 30
+
+[node name="StartPosition" parent="WaveManager8/WaveManager2/Entity4" index="6"]
+position = Vector2(-167.8, -1.8)
+texture = SubResource("CompressedTexture2D_31bwk")
+
+[node name="EndPosition" parent="WaveManager8/WaveManager2/Entity4" index="7"]
+position = Vector2(339.2, -1.79999)
+
+[node name="BossWave" parent="WaveManager8" node_paths=PackedStringArray("depend_on") instance=ExtResource("3_0u2nx")]
+depend_on = NodePath("../WaveManager2")
+depend_on_start = false
+winning_wave = true
+
+[node name="left" type="NinePatchRect" parent="."]
+z_index = 2
+offset_left = -64.0
+offset_bottom = 180.0
+texture = ExtResource("9_ibd45")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="left"]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 62.0
+offset_bottom = 19.0
+theme_override_fonts/font = ExtResource("10_i15d8")
+text = "SCORE"
+autowrap_mode = 1
+script = ExtResource("11_h23sf")
+
+[node name="right" type="NinePatchRect" parent="."]
+z_index = 2
+offset_left = 320.0
+offset_right = 384.0
+offset_bottom = 180.0
+texture = ExtResource("9_ibd45")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xk3yj")
+}
+script = ExtResource("12_8gtes")
+
+[editable path="Player"]
+[editable path="Player/PlanePlaceHolder"]
+[editable path="WaveManager8/WaveManager/Entity"]
+[editable path="WaveManager8/WaveManager/Entity/cannon"]
+[editable path="WaveManager8/WaveManager/Entity2"]
+[editable path="WaveManager8/WaveManager/Entity2/cannon"]
+[editable path="WaveManager8/WaveManager/Entity3"]
+[editable path="WaveManager8/WaveManager/Entity3/cannon"]
+[editable path="WaveManager8/WaveManager/Entity4"]
+[editable path="WaveManager8/WaveManager/Entity4/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity"]
+[editable path="WaveManager8/WaveManager2/Entity/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity2"]
+[editable path="WaveManager8/WaveManager2/Entity2/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity3"]
+[editable path="WaveManager8/WaveManager2/Entity3/cannon"]
+[editable path="WaveManager8/WaveManager2/Entity4"]
+[editable path="WaveManager8/WaveManager2/Entity4/cannon"]

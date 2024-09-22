@@ -4,6 +4,7 @@ extends State
 @export var entity : Entity = null
 # @export var duration : float = 0.1
 @export var speed = 100
+@export var finished_state = "normal"
 var end_position : Vector2 = Vector2(0, 0)
 var tween : Tween = null
 var action : bool = false
@@ -23,5 +24,5 @@ func process(delta: float) -> void:
 	entity.init_velocity = direction * speed
 	
 	if global_position.distance_to(end_position) < 16:
-		emit_signal("state_finished", self, "normal")
+		emit_signal("state_finished", self, finished_state)
 	pass

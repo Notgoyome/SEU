@@ -1,13 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://clrrrat5q7qww"]
 
 [ext_resource type="PackedScene" uid="uid://cabe7r7373inm" path="res://entities/entity.tscn" id="1_r54n0"]
+[ext_resource type="PackedScene" uid="uid://b0yq2faq1ms83" path="res://entities/enemies/states/enter.tscn" id="2_1kifw"]
 [ext_resource type="Script" path="res://entities/enemies/default/cpu_particles_2d_2.gd" id="2_gk0js"]
-[ext_resource type="Script" path="res://entities/enemies/states/enter.gd" id="2_np6o0"]
-[ext_resource type="Script" path="res://entities/enemies/states/normal.gd" id="3_p7w6c"]
+[ext_resource type="PackedScene" uid="uid://q6a0stolflia" path="res://entities/enemies/states/normal.tscn" id="3_apjoj"]
 [ext_resource type="PackedScene" uid="uid://bx8jvckmjurgl" path="res://entities/props/cannon/enemy_cannon/ennemy_cannon.tscn" id="5_mbwdp"]
 [ext_resource type="Script" path="res://entities/enemies/default/start_position.gd" id="6_devah"]
 [ext_resource type="PackedScene" uid="uid://j6lyf2tvbrve" path="res://entities/bullet/bullet_round.tscn" id="7_lpvfo"]
 [ext_resource type="Script" path="res://entities/props/cannon/component/cannon_target_player_component.gd" id="7_ps0sk"]
+[ext_resource type="PackedScene" uid="uid://bcjxqdguhbj5l" path="res://entities/enemies/default/start_position.tscn" id="8_dy3lx"]
 [ext_resource type="AudioStream" uid="uid://c8aubqprj2c3t" path="res://entities/enemies/default/retro_die_01.ogg" id="12_7e0p5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fidvg"]
@@ -32,9 +33,6 @@ animations = [{
 [sub_resource type="Gradient" id="Gradient_d7e23"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_31bwk"]
-load_path = "res://.godot/imported/ship_0000.png-14023ca36e088696ab903b615590895f.ctex"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7giod"]
 load_path = "res://.godot/imported/ship_0006.png-50b8da34db17cc386b9889101d2fb620.ctex"
 
@@ -53,13 +51,11 @@ position = Vector2(-8, 0)
 [node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Enter")
 
-[node name="Enter" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("start_position", "entity")]
-script = ExtResource("2_np6o0")
+[node name="Enter" parent="StateMachine" index="0" node_paths=PackedStringArray("start_position", "entity") instance=ExtResource("2_1kifw")]
 start_position = NodePath("../../StartPosition")
 entity = NodePath("../..")
 
-[node name="Normal" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("end_position", "entity")]
-script = ExtResource("3_p7w6c")
+[node name="Normal" parent="StateMachine" index="1" node_paths=PackedStringArray("end_position", "entity") instance=ExtResource("3_apjoj")]
 end_position = NodePath("../../EndPosition")
 entity = NodePath("../..")
 
@@ -92,16 +88,13 @@ cannon = NodePath("..")
 
 [node name="CannonParticle" parent="cannon" index="1"]
 visible = false
+local_coords = false
 
 [node name="AudioStreamPlayer2D" parent="cannon" index="2"]
 volume_db = -20.0
 pitch_scale = 0.4
 
-[node name="StartPosition" type="Sprite2D" parent="." index="6"]
-position = Vector2(1.90735e-06, 0)
-scale = Vector2(0.2, 0.2)
-texture = SubResource("CompressedTexture2D_31bwk")
-script = ExtResource("6_devah")
+[node name="StartPosition" parent="." index="6" instance=ExtResource("8_dy3lx")]
 
 [node name="EndPosition" type="Sprite2D" parent="." index="7"]
 position = Vector2(1.90735e-06, 0)

@@ -18,18 +18,21 @@ var characters: Dictionary = {
 		"type": "light",
 		"plane": planes["light"] as PackedScene,
 		"cannon": cannons["light"] as PackedScene,
+		"block_theme": "res://assets/character_cube/yellow.png",
 	},
 	"medium": {
 		"name": "cyan",
 		"type": "medium",
 		"plane": planes["medium"] as PackedScene,
 		"cannon": cannons["medium"] as PackedScene,
+		"block_theme": "res://assets/character_cube/blue.png",
 	},
 	"heavy": {
 		"name": "diesel",
 		"type": "heavy",
 		"plane": planes["heavy"] as PackedScene,
 		"cannon": cannons["heavy"] as PackedScene,
+		"block_theme": "res://assets/character_cube/green.png",
 	}
 }
 
@@ -47,26 +50,22 @@ var inventory: Dictionary = {
 		"character": characters["heavy"] as Dictionary
 	}
 }
+signal on_next_character
 
 var score: int = 0
-var selected_character: Array = [characters["medium"],characters["light"],  characters["heavy"]]
+var selected_character: Array = [characters["light"],characters["medium"],  characters["heavy"]]
+var selected_plane_list: Array[Node] = []
+var selected_cannon_list: Array[Cannon] = []
+var index_list = 0
 
 func _ready() -> void:
+	build(true)
 	pass
 
-func build() -> Array:
-	# Initialisation des listes vides pour les avions et les canons
-	var selected_plane_list: Array[Node] = []
-	var selected_cannon_list: Array[Cannon] = []
-
-	for plane in selected_plane_list:
-		if plane != null:
-			plane.queue_free()
-
-	for cannon in selected_cannon_list:
-		if cannon != null:
-			cannon.queue_free()
-
+func build(start = false) -> Array:
+	if start:
+		index_list = 0
+	reset_build()
 	for character in selected_character:
 		var plane_scene = character["plane"]
 		if plane_scene:
@@ -77,9 +76,31 @@ func build() -> Array:
 		if cannon_scene:
 			var cannon = cannon_scene.instantiate()
 			selected_cannon_list.append(cannon)
-	print(selected_plane_list, selected_cannon_list)
 	return [selected_plane_list, selected_cannon_list]
 
+func reset_build() -> void:
+	for plane in selected_plane_list:
+		if plane != null:
+			plane.queue_free()
+
+	for cannon in selected_cannon_list:
+		if cannon != null:
+			cannon.queue_free()
+	
+	selected_plane_list = []
+	selected_cannon_list = []
+
+
+func next_character():
+	index_list += 1
+	if index_list >= selected_plane_list.size():
+		return null
+	return get_character()
+
+func get_character():
+	if index_list >= selected_plane_list.size():
+		return null
+	return [selected_plane_list[index_list], selected_cannon_list[index_list]]
 
 func _process(delta: float) -> void:
 	pass

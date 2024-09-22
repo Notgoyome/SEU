@@ -11,8 +11,12 @@ var selected_plane_list: Array = []
 var selected_cannon_list: Array[Cannon] = []
 var died = false
 var built = false
+
+@onready var state_machine: StateMachine = $StateMachine
+
 func _ready() -> void:
-	consume()
+	UserData.build()
+	set_character()
 	pass
 
 # STATE
@@ -26,7 +30,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction = get_input_direction()
-	if can_action:
+	if can_action and plane != null:
 		if direction == Vector2.ZERO:
 			velocity = velocity.move_toward(Vector2.ZERO, plane.friction * delta)
 		else:
@@ -41,22 +45,24 @@ func get_input_direction() -> Vector2:
 
 	return direction
 
-
-func consume() -> void:
-	if not built:
-		var build = UserData.build()
-		selected_plane_list = build[0]
-		selected_cannon_list = build[1]
-		built = true
-	var plane_temp = selected_plane_list.pop_front()
-	var cannon_temp = selected_cannon_list.pop_front()
-	
-	if plane_temp == null or cannon_temp == null:
+func set_character():
+	var character = UserData.get_character()
+	if character == null:
 		died = true
-		return
+		return false
+	var plane_temp = character[0]
+	var cannon_temp = character[1]
+
 	plane = plane_temp
 	add_child(plane)
 	cannon = cannon_temp
 	add_child(cannon)
 	cannon.team = Team.TEAM.PLAYER
-	pass
+	return true
+
+
+func state_win() -> void:
+	if died:
+		return
+	state_machine.change_state("win")
+	pass # Replace with function body.

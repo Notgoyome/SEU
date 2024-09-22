@@ -7,12 +7,16 @@ class_name Bullet
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var collision_shape_area : CollisionShape2D = $Area2D/CollisionShape2D
 @export var bounce_step = 0
+@export var particle_on_collision : CPUParticles2D = null
+
 var bounce_index = 0
 var speed = 0
 var damage = 0
 var cannon_direction = Vector2(0, 1)
 var team_type = Team.TEAM.PLAYER
 var die_next_turn = false
+signal on_touched
+
 func _ready() -> void:
 	disable()
 	pass
@@ -66,4 +70,7 @@ func _on_area_2d_body_entered(body:Node2D) -> void:
 	if body.has_node("HealthComponent") and body.get_node("HealthComponent").team != team_type:
 		body.get_node("HealthComponent").damage(damage)
 		disable()
+		if particle_on_collision:
+			particle_on_collision.emitting = true
+		emit_signal("on_touched")
 	pass # Replace with function body.

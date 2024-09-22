@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=3 uid="uid://capih1mkhgsn4"]
+
+[ext_resource type="PackedScene" uid="uid://dxm5pm1gts11i" path="res://scenes/level/level.tscn" id="1_4s7l2"]
+[ext_resource type="PackedScene" uid="uid://bi3hl58rk1b2u" path="res://component/wave_manager/wave_manager.tscn" id="2_42522"]
+[ext_resource type="PackedScene" uid="uid://0yvri27bwoyb" path="res://entities/waves_pack/default_1_vertical.tscn" id="3_7wu2c"]
+[ext_resource type="PackedScene" uid="uid://b1vng3hfswxww" path="res://entities/waves_pack/wave_manager_2.tscn" id="4_1fgeq"]
+[ext_resource type="PackedScene" uid="uid://cb60ltuoaendq" path="res://entities/waves_pack/default_3.tscn" id="5_ocbi6"]
+[ext_resource type="PackedScene" uid="uid://bu7o2kbl8d4g5" path="res://entities/waves_pack/default_6_curve.tscn" id="6_3byxc"]
+
+[node name="Node2D" instance=ExtResource("1_4s7l2")]
+
+[node name="WaveManager9" parent="." index="4" instance=ExtResource("2_42522")]
+visible = false
+duration = 0.0
+
+[node name="WaveManager" parent="WaveManager9" index="0" instance=ExtResource("2_42522")]
+duration = 0.0
+
+[node name="default_1" parent="WaveManager9/WaveManager" index="0" instance=ExtResource("3_7wu2c")]
+position = Vector2(32, -8)
+duration = 0.0
+
+[node name="default_2" parent="WaveManager9/WaveManager" index="1" instance=ExtResource("3_7wu2c")]
+position = Vector2(144, -8)
+duration = 0.0
+
+[node name="WaveManager2" parent="WaveManager9" index="1" instance=ExtResource("4_1fgeq")]
+visible = false
+
+[node name="WaveManager3" parent="WaveManager9" index="2" instance=ExtResource("2_42522")]
+visible = false
+position = Vector2(-16, -16)
+duration = 5.0
+
+[node name="default_1" parent="WaveManager9/WaveManager3" index="0" instance=ExtResource("5_ocbi6")]
+position = Vector2(-8, 8)
+
+[node name="default_2" parent="WaveManager9/WaveManager3" index="1" instance=ExtResource("5_ocbi6")]
+position = Vector2(-8, 8)
+duration = 2.0
+
+[node name="default_3" parent="WaveManager9/WaveManager3" index="2" instance=ExtResource("5_ocbi6")]
+position = Vector2(-8, 8)
+duration = 3.0
+
+[node name="WaveManager4" parent="WaveManager9" index="3" instance=ExtResource("2_42522")]
+visible = false
+duration = 9.0
+
+[node name="default_1" parent="WaveManager9/WaveManager4" index="0" instance=ExtResource("6_3byxc")]
+position = Vector2(8, 24)
+
+[node name="WaveManager5" parent="WaveManager9" index="4" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_42522")]
+visible = false
+position = Vector2(74, 0)
+duration = 2.0
+depend_on = NodePath("../WaveManager4")
+
+[node name="default_1" parent="WaveManager9/WaveManager5" index="0" instance=ExtResource("3_7wu2c")]
+position = Vector2(-22, -8)
+duration = 0.0
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_1/Entity2" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_1/Entity3" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_1/Entity4" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_1/Entity5" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_1/Entity6" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_1/Entity7" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="default_2" parent="WaveManager9/WaveManager5" index="1" instance=ExtResource("3_7wu2c")]
+position = Vector2(50, -8)
+duration = 2.0
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_2/Entity2" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_2/Entity3" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_2/Entity4" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_2/Entity5" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_2/Entity6" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="StartPosition" parent="WaveManager9/WaveManager5/default_2/Entity7" index="6"]
+position = Vector2(0, -58.8)
+
+[node name="WaveManager6" parent="WaveManager9" index="5" node_paths=PackedStringArray("depend_on") instance=ExtResource("4_1fgeq")]
+visible = false
+depend_on = NodePath("../WaveManager5")
+
+[node name="EndWave" parent="." index="5" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_42522")]
+duration = 0.0
+depend_on = NodePath("../WaveManager9")
+depend_on_start = false
+winning_wave = true
+
+[connection signal="on_winning_wave" from="WaveManager9/WaveManager" to="Player" method="_on_wave_manager_on_winning_wave"]
+[connection signal="on_winning_wave" from="EndWave" to="Player" method="_on_boss_wave_on_winning_wave"]
+
+[editable path="Player"]
+[editable path="Player/PlanePlaceHolder"]
+[editable path="WaveManager9/WaveManager5/default_1"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity2"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity2/cannon"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity3"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity3/cannon"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity4"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity4/cannon"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity5"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity5/cannon"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity6"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity6/cannon"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity7"]
+[editable path="WaveManager9/WaveManager5/default_1/Entity7/cannon"]
+[editable path="WaveManager9/WaveManager5/default_2"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity2"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity2/cannon"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity3"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity3/cannon"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity4"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity4/cannon"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity5"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity5/cannon"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity6"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity6/cannon"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity7"]
+[editable path="WaveManager9/WaveManager5/default_2/Entity7/cannon"]

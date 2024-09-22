@@ -6,6 +6,7 @@ var waves : Array[WaveManager] = []
 @export var depend_on: WaveManager = null
 @export var depend_on_start : bool = true
 @export var disabled = false
+@export var winning_wave = false
 var timer = Timer.new()
 var finished = false
 var ready_wave = true
@@ -13,9 +14,9 @@ var ready_wave = true
 var has_started = false
 
 
+signal on_winning_wave
+
 func _ready():
-	if disabled:
-		return
 	show()
 	timer.set_wait_time(duration)
 	timer.timeout.connect(start_wave)
@@ -27,6 +28,16 @@ func _ready():
 			waves.append(node)
 		if node is Entity:
 			entities.append(node)
+	if disabled:
+		disable()
+		return
+	pass
+
+func disable():
+	disabled = true
+	timer.stop()
+	for wave in waves:
+		wave.disable()
 	pass
 
 func reset():
@@ -49,22 +60,31 @@ func _process(delta: float):
 
 	if !has_started:
 		if depend_on:
-			if depend_on.finished and !depend_on_start:
-				timer.start()
-			if depend_on_start and depend_on.has_started:
-				timer.start()
-		else:
+			depend_start()
+		elif duration > 0:
 			timer.start()
+		else:
+			start_wave()
 		return
 	
+	#winning condition
 	for entity in entities:
 		if entity != null and entity.enable:
 			return
 	for wave in waves:
 		if not wave.finished:
 			return
+
 	finished = true
+	if winning_wave:
+		handle_winning_wave()
 pass
+
+func depend_start():
+	if depend_on.finished and !depend_on_start:
+		timer.start()
+	if depend_on_start and depend_on.has_started:
+		timer.start()
 
 func start_wave():
 	has_started = true
@@ -72,4 +92,8 @@ func start_wave():
 		entity.start()
 	for wave in waves:
 		wave.ready_wave = true
+	pass
+
+func handle_winning_wave():
+	LevelGlobal.win_level()
 	pass

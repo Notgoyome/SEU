@@ -4,6 +4,7 @@ class_name HealthComponent
 @export var initial_health = 100
 @export var max_health = 100
 @export var team : Team.TEAM = Team.TEAM.PLAYER
+@export var infinite_invincible = false
 var alive = true
 var invincible_timer = Timer.new()
 var invincible_duration = 1
@@ -33,7 +34,7 @@ func _on_invincible_timer_timeout() -> void:
 
 
 func damage(damage: int) -> void:
-	if is_invincible:
+	if is_invincible or infinite_invincible:
 		return
 	health = max(health - damage, 0)
 	if health <= 0:

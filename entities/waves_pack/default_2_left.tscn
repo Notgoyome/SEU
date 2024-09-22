@@ -42,17 +42,11 @@ position = Vector2(96, 24)
 position = Vector2(-176, 0)
 
 [connection signal="signal_dead" from="Entity2/HealthComponent" to="Entity2/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity2/HealthComponent" to="Entity2/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity3/HealthComponent" to="Entity3/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity3/HealthComponent" to="Entity3/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity4/HealthComponent" to="Entity4/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity4/HealthComponent" to="Entity4/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity5/HealthComponent" to="Entity5/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity5/HealthComponent" to="Entity5/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity6/HealthComponent" to="Entity6/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity6/HealthComponent" to="Entity6/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity7/HealthComponent" to="Entity7/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity7/HealthComponent" to="Entity7/cannon" method="_on_health_component_signal_dead"]
 
 [editable path="Entity2"]
 [editable path="Entity2/cannon"]

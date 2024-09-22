@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://beye6ll082pev"]
+
+[ext_resource type="PackedScene" uid="uid://clrrrat5q7qww" path="res://entities/enemies/default/default.tscn" id="1_g1u8p"]
+[ext_resource type="Texture2D" uid="uid://bxigjffsd0hn7" path="res://entities/props/plane/assets/ship_0001.png" id="2_x8u10"]
+[ext_resource type="PackedScene" uid="uid://cgtplphc1frmx" path="res://entities/bullet/bullet_red.tscn" id="3_nbtxa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6emd"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83can"]
+atlas = ExtResource("2_x8u10")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_80vh7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83can")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Entity" instance=ExtResource("1_g1u8p")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_i6emd")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_80vh7")
+
+[node name="HealthComponent" parent="." index="2"]
+health = 300
+initial_health = 300
+max_health = 300
+
+[node name="Normal" parent="StateMachine" index="1"]
+speed = 150
+
+[node name="cannon" parent="." index="5"]
+position = Vector2(0, 16)
+bullet_scene = ExtResource("3_nbtxa")
+bullet_speed = 4.0
+bullet_cooldown = 0.6
+
+[node name="CannonTargetPlayerComponent" parent="cannon" index="0"]
+disabled = true
+
+[editable path="cannon"]

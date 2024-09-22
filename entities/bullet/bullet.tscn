@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://brgjgkeko4erp"]
+[gd_scene load_steps=10 format=3 uid="uid://brgjgkeko4erp"]
 
 [ext_resource type="Texture2D" uid="uid://cuwps5r7lm7n0" path="res://assets/tiles_packed.png" id="1_gsl46"]
 [ext_resource type="Script" path="res://entities/bullet/bullet.gd" id="1_tu2ys"]
 [ext_resource type="Script" path="res://component/movement_component/straight.gd" id="3_u1u3d"]
 [ext_resource type="Script" path="res://component/movement_component/normal.gd" id="4_wav3m"]
+[ext_resource type="Texture2D" uid="uid://bq4wkv4owkc16" path="res://assets/effect/circle.png" id="5_5nsam"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_otnm0"]
 size = Vector2(10.4844, 16)
@@ -35,11 +36,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("movement_component")]
+[node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "particle_on_collision")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_tu2ys")
 movement_component = NodePath("Normal")
+particle_on_collision = NodePath("CPUParticles2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.00174, 1.00188)
@@ -60,5 +62,19 @@ velocity = Vector2(0, 1)
 
 [node name="Normal" type="Node" parent="."]
 script = ExtResource("4_wav3m")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.1
+one_shot = true
+explosiveness = 0.7
+fract_delta = false
+local_coords = true
+texture = ExtResource("5_5nsam")
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 20.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

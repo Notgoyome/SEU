@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://bmk3amf6ke4ym"]
+
+[ext_resource type="PackedScene" uid="uid://cabe7r7373inm" path="res://entities/entity.tscn" id="1_rvl86"]
+[ext_resource type="Texture2D" uid="uid://dw1bp67i3n02i" path="res://entities/props/plane/assets/ship_0015.png" id="2_h1uy5"]
+[ext_resource type="PackedScene" uid="uid://bx8jvckmjurgl" path="res://entities/props/cannon/enemy_cannon/ennemy_cannon.tscn" id="2_mveq6"]
+[ext_resource type="PackedScene" uid="uid://b0yq2faq1ms83" path="res://entities/enemies/states/enter.tscn" id="3_e6awq"]
+[ext_resource type="PackedScene" uid="uid://j6lyf2tvbrve" path="res://entities/bullet/bullet_round.tscn" id="3_fsx0w"]
+[ext_resource type="PackedScene" uid="uid://bcjxqdguhbj5l" path="res://entities/enemies/default/start_position.tscn" id="4_e4yy0"]
+[ext_resource type="Script" path="res://entities/props/cannon/component/cannon_target_player_component.gd" id="4_te3rt"]
+[ext_resource type="Script" path="res://entities/enemies/states/normal_left_right.gd" id="5_ggm5m"]
+[ext_resource type="Script" path="res://entities/enemies/boss/phase_2.gd" id="7_mrajr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fqeb"]
+atlas = ExtResource("2_h1uy5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ta0kw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fqeb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Boss" instance=ExtResource("1_rvl86")]
+
+[node name="cannon_round" parent="." index="0" instance=ExtResource("2_mveq6")]
+cannon_direction = Vector2(0, 1)
+auto_fire = true
+bullet_scene = ExtResource("3_fsx0w")
+bullet_speed = 2.0
+bullet_cooldown = 0.5
+bullet_num = 20
+bullet_angle = 360
+angle_offset_per_shot = 10
+bullet_pool_size = 400
+can_shoot = false
+team = 1
+
+[node name="cannon_sniper" parent="." index="1" instance=ExtResource("2_mveq6")]
+position = Vector2(0, 8)
+cannon_direction = Vector2(0, 1)
+auto_fire = true
+bullet_scene = ExtResource("3_fsx0w")
+bullet_speed = 6.0
+bullet_cooldown = 1.0
+bullet_num = 2
+bullet_angle = 15
+bullet_pool_size = 20
+can_shoot = false
+team = 1
+
+[node name="CannonTargetPlayerComponent" type="Node2D" parent="cannon_sniper" index="0" node_paths=PackedStringArray("cannon")]
+script = ExtResource("4_te3rt")
+cannon = NodePath("..")
+
+[node name="CannonParticle" parent="cannon_sniper" index="1"]
+visible = false
+local_coords = false
+
+[node name="AudioStreamPlayer2D" parent="cannon_sniper" index="2"]
+volume_db = -20.0
+pitch_scale = 0.4
+
+[node name="AnimatedSprite2D" parent="." index="3"]
+sprite_frames = SubResource("SpriteFrames_ta0kw")
+flip_v = true
+
+[node name="HealthComponent" parent="." index="4"]
+health = 12000
+initial_health = 12000
+max_health = 12000
+
+[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Enter")
+
+[node name="Enter" parent="StateMachine" index="0" node_paths=PackedStringArray("start_position", "entity") instance=ExtResource("3_e6awq")]
+start_position = NodePath("../../StartPosition")
+entity = NodePath("../..")
+finished_state = "NormalLeftRight"
+
+[node name="NormalLeftRight" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("entity")]
+script = ExtResource("5_ggm5m")
+entity = NodePath("../..")
+speed = 20
+
+[node name="phase2" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("entity")]
+script = ExtResource("7_mrajr")
+entity = NodePath("../..")
+
+[node name="StartPosition" parent="." index="7" instance=ExtResource("4_e4yy0")]
+position = Vector2(1.90735e-06, -72)
+
+[connection signal="on_normal_entered" from="StateMachine/NormalLeftRight" to="cannon_round" method="_on_normal_normal_entered"]
+[connection signal="on_normal_exited" from="StateMachine/NormalLeftRight" to="cannon_round" method="_on_normal_normal_exited"]
+[connection signal="on_normal_entered" from="StateMachine/phase2" to="cannon_sniper" method="_on_normal_normal_entered"]
+[connection signal="on_normal_exited" from="StateMachine/phase2" to="cannon_sniper" method="_on_normal_normal_exited"]
+
+[editable path="cannon_sniper"]

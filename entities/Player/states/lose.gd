@@ -14,5 +14,5 @@ func _process(delta: float) -> void:
 func enter() -> void:
 	player.can_action = false
 	player.hide()
-	TransitionGlobal.reload_scene()
+	LevelGlobal.return_to_build()
 	pass # Replace with function body.

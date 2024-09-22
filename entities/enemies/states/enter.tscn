@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0yq2faq1ms83"]
+
+[ext_resource type="Script" path="res://entities/enemies/states/enter.gd" id="1_nbnr5"]
+
+[node name="Enter" type="Node"]
+script = ExtResource("1_nbnr5")

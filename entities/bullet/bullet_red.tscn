@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgtplphc1frmx"]
+
+[ext_resource type="PackedScene" uid="uid://brgjgkeko4erp" path="res://entities/bullet/bullet.tscn" id="1_tfnps"]
+[ext_resource type="Texture2D" uid="uid://bx430tebtquk" path="res://entities/bullet/bullet_asset/long_red.png" id="2_qfx70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6c1r"]
+atlas = ExtResource("2_qfx70")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8kta5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6c1r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" instance=ExtResource("1_tfnps")]
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_8kta5")
+flip_v = true

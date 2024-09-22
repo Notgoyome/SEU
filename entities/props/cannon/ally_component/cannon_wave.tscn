@@ -6,3 +6,6 @@
 [node name="cannon" instance=ExtResource("1_yrod5")]
 bullet_scene = ExtResource("2_thm31")
 bullet_cooldown = 0.1
+
+[node name="CannonParticle" parent="." index="0"]
+local_coords = false

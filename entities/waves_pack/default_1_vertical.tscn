@@ -8,6 +8,9 @@
 [node name="Entity2" parent="." index="0" instance=ExtResource("2_ch4x3")]
 position = Vector2(48, 48)
 
+[node name="CannonParticle" parent="Entity2/cannon" index="1"]
+local_coords = false
+
 [node name="StartPosition" parent="Entity2" index="6"]
 position = Vector2(0, -112)
 
@@ -16,6 +19,9 @@ position = Vector2(0.199997, 187)
 
 [node name="Entity3" parent="." index="1" instance=ExtResource("2_ch4x3")]
 position = Vector2(72, 48)
+
+[node name="CannonParticle" parent="Entity3/cannon" index="1"]
+local_coords = false
 
 [node name="StartPosition" parent="Entity3" index="6"]
 position = Vector2(0, -112)
@@ -26,6 +32,9 @@ position = Vector2(1.90735e-06, 187.2)
 [node name="Entity4" parent="." index="2" instance=ExtResource("2_ch4x3")]
 position = Vector2(96, 48)
 
+[node name="CannonParticle" parent="Entity4/cannon" index="1"]
+local_coords = false
+
 [node name="StartPosition" parent="Entity4" index="6"]
 position = Vector2(0, -112)
 
@@ -34,6 +43,9 @@ position = Vector2(1.90735e-06, 187.2)
 
 [node name="Entity5" parent="." index="3" instance=ExtResource("2_ch4x3")]
 position = Vector2(48, 24)
+
+[node name="CannonParticle" parent="Entity5/cannon" index="1"]
+local_coords = false
 
 [node name="StartPosition" parent="Entity5" index="6"]
 position = Vector2(0, -112)
@@ -44,6 +56,9 @@ position = Vector2(1.90735e-06, 187.2)
 [node name="Entity6" parent="." index="4" instance=ExtResource("2_ch4x3")]
 position = Vector2(72, 24)
 
+[node name="CannonParticle" parent="Entity6/cannon" index="1"]
+local_coords = false
+
 [node name="StartPosition" parent="Entity6" index="6"]
 position = Vector2(0, -112)
 
@@ -53,6 +68,9 @@ position = Vector2(1.90735e-06, 187.2)
 [node name="Entity7" parent="." index="5" instance=ExtResource("2_ch4x3")]
 position = Vector2(96, 24)
 
+[node name="CannonParticle" parent="Entity7/cannon" index="1"]
+local_coords = false
+
 [node name="StartPosition" parent="Entity7" index="6"]
 position = Vector2(0, -112)
 
@@ -60,17 +78,11 @@ position = Vector2(0, -112)
 position = Vector2(1.90735e-06, 187.2)
 
 [connection signal="signal_dead" from="Entity2/HealthComponent" to="Entity2/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity2/HealthComponent" to="Entity2/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity3/HealthComponent" to="Entity3/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity3/HealthComponent" to="Entity3/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity4/HealthComponent" to="Entity4/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity4/HealthComponent" to="Entity4/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity5/HealthComponent" to="Entity5/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity5/HealthComponent" to="Entity5/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity6/HealthComponent" to="Entity6/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity6/HealthComponent" to="Entity6/cannon" method="_on_health_component_signal_dead"]
 [connection signal="signal_dead" from="Entity7/HealthComponent" to="Entity7/CPUParticles2D2" method="_on_health_component_signal_dead"]
-[connection signal="signal_dead" from="Entity7/HealthComponent" to="Entity7/cannon" method="_on_health_component_signal_dead"]
 
 [editable path="Entity2"]
 [editable path="Entity2/cannon"]

@@ -1,8 +1,10 @@
 extends Node2D
 
 @export var cannon : Cannon
-
+@export var disabled = false
 func _process(delta):
+	if cannon == null or cannon.is_queued_for_deletion() or disabled:
+		return
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() == 0:
 		return

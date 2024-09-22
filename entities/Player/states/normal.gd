@@ -19,8 +19,11 @@ func enter() -> void:
 func _on_health_component_signal_dead() -> void:
 	if !is_normal:
 		return
-	player.consume()
-	if player.died:
+
+	UserData.next_character()
+	var result = player.set_character()
+
+	if !result:
 		emit_signal("state_finished", self, "died")
 		return
 	emit_signal("state_finished", self, "Scene")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://gok7e6hlch4j"]
+
+[ext_resource type="PackedScene" uid="uid://dxm5pm1gts11i" path="res://scenes/level/level.tscn" id="1_2nles"]
+[ext_resource type="PackedScene" uid="uid://bi3hl58rk1b2u" path="res://component/wave_manager/wave_manager.tscn" id="2_783mk"]
+[ext_resource type="PackedScene" uid="uid://bmk3amf6ke4ym" path="res://entities/enemies/boss/boss.tscn" id="3_4svg2"]
+
+[node name="Node2D" instance=ExtResource("1_2nles")]
+
+[node name="WaveManager" parent="." index="6" instance=ExtResource("2_783mk")]
+
+[node name="Entity" parent="WaveManager" index="0" instance=ExtResource("3_4svg2")]
+position = Vector2(155, 16)
+friction = 800
+
+[node name="WaveManager2" parent="." index="7" node_paths=PackedStringArray("depend_on") instance=ExtResource("2_783mk")]
+duration = 0.0
+depend_on = NodePath("../WaveManager")
+depend_on_start = false
+winning_wave = true
+
+[editable path="Player"]
+[editable path="Player/PlanePlaceHolder"]

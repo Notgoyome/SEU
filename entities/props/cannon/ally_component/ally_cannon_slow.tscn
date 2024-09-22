@@ -4,5 +4,5 @@
 
 [node name="cannon" instance=ExtResource("1_4s4ng")]
 bullet_speed = 10.0
-bullet_cooldown = 0.15
-bullet_damage = 200
+bullet_cooldown = 0.3
+bullet_damage = 700

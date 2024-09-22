@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://q6a0stolflia"]
+
+[ext_resource type="Script" path="res://entities/enemies/states/normal.gd" id="1_0rcvo"]
+
+[node name="Normal" type="Node"]
+script = ExtResource("1_0rcvo")

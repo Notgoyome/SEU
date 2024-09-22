@@ -14,7 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     pass    
 
-func change_scene(scene_path: String = "", reload = false) -> void:
+func change_scene(scene_path: String = "", reload = false):
     animation_player.play("start")
     
     await animation_player.animation_finished
@@ -25,6 +25,7 @@ func change_scene(scene_path: String = "", reload = false) -> void:
     await get_tree().process_frame
 
     animation_player.play("end")
+    return true
 
 
 
